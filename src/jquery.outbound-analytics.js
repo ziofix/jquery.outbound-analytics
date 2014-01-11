@@ -20,7 +20,11 @@
       });
 
       try {
-        _gaq.push(['_trackEvent', params.category, params.action, params.label, params.value, params.nonInteraction]);
+        if(_gaq !== undefined) {
+          _gaq.push(['_trackEvent', params.category, params.action, params.label, params.value, params.nonInteraction]);
+        } else {
+          ga('send', 'event', params.category, params.action, params.label, params.value, {'nonInteraction': params.nonInteraction});
+        }
       } catch (e) {
         // do something in the future
       }
